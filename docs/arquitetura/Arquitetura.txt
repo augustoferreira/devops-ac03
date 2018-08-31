@@ -1,0 +1,21 @@
+A placa Arduino UNO já está em sua terceira revisão e você pode baixar seu esquema elétrico no site do Arduino, ou até mesmo todos os arquivos do projeto para edição. Ela tem duas camadas apenas e várias características interessantes de projeto. A seguir serão apresentadas as principais características do seu hardware.
+
+A placa pode ser alimentada pela conexão USB ou por uma fonte de alimentação externa.
+
+A alimentação externa é feita através do conector Jack com positivo no centro, onde o valor de tensão da fonte externa deve estar entre os limites 6V. a 20V., porém se alimentada com uma tensão abaixo de 7V., a tensão de funcionamento da placa, que no Arduino Uno é 5V, pode ficar instável e quando alimentada com tensão acima de 12V, o regulador de tensão da placa pode sobreaquecer e danificar a placa. Dessa forma, é recomendado para tensões de fonte externa valores de 7V. a 12V.
+
+O circuito regulador para entrada externa é exibido a seguir. Nota-se que o CI responsável pela regulação de tensão é o NCP1117, da OnSemi. Destaque para o diodo D1 que protege o circuito caso uma fonte com tensão invertida for ligada.
+
+Quando o cabo USB é plugado a um PC por exemplo, a tensão não precisa ser estabilizada pelo regulador de tensão. Dessa forma a placa é alimentada diretamente pela USB. O circuito da USB apresenta alguns componentes que protegem a porta USB do computador em caso de alguma anormalidade. Na figura abaixo é exibido o circuito de proteção da USB da placa Arduino UNO.
+
+Os dois varistores (Z1 e Z2) podem suportar picos elevados de SURGE e energias elevadas de transientes. Seria preferível se, ao invés de varistores, fossem conectados diodos supressores de ESD que tem capacitância bem baixa, já que estão ligados a pinos rápidos de comunicação, mas o circuito funciona bem mesmo assim. O resistores de 22 Ohms (RN3A e RN3D), limitam uma corrente resultante de alguma descarga elétrica eventual de um usuário em contato com o conector USB, resultante de transientes rápidos, protegendo, dessa forma, os pinos do microcontrolador. Podem ser utilizados também para que 
+
+O fusível resetável (F1) de 500mA. impede que a porta USB do computador queime, caso ocorra algum problema de projeto ou uma falha no circuito e ultrapasse a corrente de 500 mA. quando a  placa estiver conectada ao PC. O ferrite L1 foi incluído no circuito para que ruídos da USB externa não entrem no circuito da placa Arduino, através de seu terra.
+
+
+Além dos recursos apresentados anteriormente, a  placa conta com um circuito pra comutar a alimentação automaticamente entre a tensão da USB e a tensão da fonte externa. Esse circuito está apresentado na figura abaixo. Caso haja uma tensão no conector DC e a USB é conectada, a tensão de 5V será proveniente da fonte externa e USB servirá apenas para comunicação com o PC.
+
+Circuito de seleção de fonte na Arduino UNO
+Figura 4 - Circuito de seleção de fonte na arduino UNO
+
+Como pode-se observar na figura anterior existe na placa um regulador de 3,3V. (U2- LP2985), este componente é responsável por fornecer uma tensão continua de 3,3V para alimentação de circuitos ou shields que necessitem desse valor de tensão. Deve-se ficar atento ao limite máximo do valor da corrente  que este regulador pode fornecer, que no caso é de 50 mA.
